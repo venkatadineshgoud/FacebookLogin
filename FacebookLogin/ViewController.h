@@ -14,6 +14,7 @@
 
 @property(nonatomic,strong)DetailsViewController *Obj;
 @property(nonatomic,strong)NSMutableArray *arr,*dict;
+- (IBAction)Login:(UIButton *)sender;
 
 
 

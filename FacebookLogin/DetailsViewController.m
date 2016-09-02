@@ -17,8 +17,10 @@
 @implementation DetailsViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     [self getUserData];
+    
        // Do any additional setup after loading the view.
 }
 
@@ -34,40 +36,70 @@
      startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
          if (!error)
          {
-                NSLog(@"friends : %@",result);
+               // NSLog(@"friends : %@",result);
+             
              [self updateViewWithData:result];
+             
          }
      }];
-    
-   
     
     
 }
 
 - (void)updateViewWithData:(NSDictionary *)userData {
+    NSLog(@"user data %@",userData);
+    
+    
+    
+    self.friendsarr=[NSArray arrayWithArray:[[userData valueForKey:@"friends"]valueForKey:@"data"]];
+    NSLog(@"friends arr %@",self.friendsarr);
+
+    
+    
+    self.label1.text=[userData valueForKey:@"name"];
+    
+    
+    
+    NSURL *url=[NSURL URLWithString:[[[userData valueForKey:@"picture"] valueForKey:@"data"]valueForKey:@"url"]];
+    NSData *data=[NSData dataWithContentsOfURL:url];
+    self.imageview.image=[UIImage imageWithData:data];
     
 }
 
 
-- (void)getFriendsListByUserId:(NSString *)userId {
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/friends", userId] parameters:nil]
-     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-         if (!error)
-         {
-             NSLog(@"friends : %@",result);
-         }
-     }];
-
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return (@"friends");
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.friendsarr.count;
 }
 
-/*
-#pragma mark - Navigation
+// Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
+// Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *myid=@"cell";
+    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:myid];
+    if (cell==nil) {
+        
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:myid];
+    
 }
-*/
+    cell.textLabel.text=[[self.friendsarr objectAtIndex:indexPath.row] valueForKey:@"name"];
+    return cell;
+}
 
+//- (void)getFriendsListByUserId:(NSString *)userId {
+//    [[[FBSDKGraphRequest alloc] initWithGraphPath:[NSString stringWithFormat:@"/%@/friends", userId] parameters:nil]
+//     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+//         if (!error)
+//         {
+//             NSLog(@"friends id : %@",result);
+//         }
+//     }];
+//
+//}
 @end
