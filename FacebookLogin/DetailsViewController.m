@@ -54,7 +54,7 @@
     self.friendsarr=[NSArray arrayWithArray:[[userData valueForKey:@"friends"]valueForKey:@"data"]];
     NSLog(@"friends arr %@",self.friendsarr);
 
-    
+    [self.tableview reloadData];
     
     self.label1.text=[userData valueForKey:@"name"];
     
@@ -63,6 +63,22 @@
     NSURL *url=[NSURL URLWithString:[[[userData valueForKey:@"picture"] valueForKey:@"data"]valueForKey:@"url"]];
     NSData *data=[NSData dataWithContentsOfURL:url];
     self.imageview.image=[UIImage imageWithData:data];
+    
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:[NSString stringWithFormat:@"/%@",self.friendsarr[0][@"id"]]
+                                  parameters:@{@"fields": @"id,about,age_range,bio, birthday, cover, email, first_name, hometown"}
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        // Handle the result
+        
+        NSLog(@"Friend detail %@", result);
+        NSLog(@"Error %@", error);
+
+        
+    }];
+    
     
 }
 
