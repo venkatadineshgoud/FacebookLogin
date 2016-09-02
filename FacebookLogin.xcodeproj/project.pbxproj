@@ -98,6 +98,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B878A2C1D7984EE006980D2 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		6D10B9671D76C14900A6D20B = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +132,7 @@
 			children = (
 				6D10B9761D76C14A00A6D20B /* AppDelegate.h */,
 				6D10B9771D76C14A00A6D20B /* AppDelegate.m */,
+				6B878A2C1D7984EE006980D2 /* New Group */,
 				6D10B9791D76C14A00A6D20B /* ViewController.h */,
 				6D10B97A1D76C14A00A6D20B /* ViewController.m */,
 				6B9C73901D77047B00268854 /* DetailsViewController.h */,

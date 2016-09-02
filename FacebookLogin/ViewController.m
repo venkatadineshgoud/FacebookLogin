@@ -21,33 +21,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.arr=[[NSMutableArray alloc]init];
-    self.dict=[[NSMutableArray alloc]init];
-//    FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-//    loginButton.center = self.view.center;
-//    [self.view addSubview:loginButton];
-    // Do any additional setup after loading the view, typically from a nib.
-    // Add a custom login button to your app
-    UIButton *myLoginButton=[UIButton buttonWithType:UIButtonTypeCustom];
-    myLoginButton.backgroundColor=[UIColor darkGrayColor];
-    myLoginButton.frame=CGRectMake(0,0,180,40);
-    myLoginButton.center = self.view.center;
-    [myLoginButton setTitle: @"My Login Button" forState: UIControlStateNormal];
-    
-    // Handle clicks on the button
-    [myLoginButton
-     addTarget:self
-     action:@selector(loginButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Add the button to the view
-    [self.view addSubview:myLoginButton];
-    
+        
 
 }
 
-// Once the button is clicked, show the login dialog
--(void)loginButtonClicked
-{
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)Login:(UIButton *)sender {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     [login
      logInWithReadPermissions: @[@"public_profile", @"email", @"user_friends", @"read_custom_friendlists"]
@@ -62,20 +45,6 @@
              [self performSegueWithIdentifier:@"next" sender:nil];
          }
      }];
-    
-    
 
 }
-
-
-
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

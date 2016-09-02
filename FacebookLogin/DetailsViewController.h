@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface DetailsViewController : UIViewController
-@property(nonatomic,strong)NSArray *arr1;
+
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UIImageView *imageview;
 @property (weak, nonatomic) IBOutlet UITableView *tableview;
+- (void)updateViewWithData:(NSDictionary *)userData;
+@property(nonatomic,strong)NSArray *friendsarr;
 
 @end
